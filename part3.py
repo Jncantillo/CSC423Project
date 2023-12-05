@@ -2,7 +2,7 @@ import sqlite3
 import pandas as pd
 from datetime import date
 
-#connect to or create assignment3 database
+#connect to or create cleaning database
 db_connect = sqlite3.connect('cleaning.db')
 
 #create cursor to run queries
