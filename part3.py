@@ -31,7 +31,8 @@ query = """
         clientNo INT,
         startDate DATE,
         StartTime TIME,
-        duration INT,
+        duration TIME
+        CHECK(duration > '00:00:00'),
         comments VARCHAR(1000),
         FOREIGN KEY (clientNo) REFERENCES Client(clientNo)
         PRIMARY KEY(requirementId)
@@ -126,11 +127,11 @@ print(frame.head())
 #Query to add to Requirement table
 query = "INSERT INTO Requirement (requirementId, clientNo, startDate, startTime, duration, comments) VALUES (?,?,?,?,?,?)"
 data = [
-        (68463, 5849, date(2023, 12, 15), '08:00:00', 8, "Client requested fresh fruit placed on kitchen table after service concludes"),
-        (23647, 2956, date(2023, 12, 17), '09:00:00', 6, "Client's boathouse also needs cleaning"),
-        (56783, 2947, date(2023, 12, 19), '09:30:00', 4, "Client requested that the roped-off machines must not be touched"),
-        (68464, 1047, date(2023, 12, 16), '08:45:00', 10, "Client requested that no animal products be used during cleaning"),
-        (56834, 5837, date(2023, 12, 20), '12:30:00', 5, "Client specifically mentioned that there must be no parties on the premises")
+        (68463, 5849, date(2023, 12, 15), '08:00:00', '08:00:00', "Client requested fresh fruit placed on kitchen table after service concludes"),
+        (23647, 2956, date(2023, 12, 17), '09:00:00', '06:00:00', "Client's boathouse also needs cleaning"),
+        (56783, 2947, date(2023, 12, 19), '09:30:00', '04:00:00', "Client requested that the roped-off machines must not be touched"),
+        (68464, 1047, date(2023, 12, 16), '08:45:00', '10:00:00', "Client requested that no animal products be used during cleaning"),
+        (56834, 5837, date(2023, 12, 20), '12:30:00', '05:00:00', "Client specifically mentioned that there must be no parties on the premises")
         ]
 cursor.executemany(query,data)
 
@@ -225,7 +226,7 @@ frame = pd.read_sql_query(query,db_connect)
 print("\n EmployeeRequirement Table:")
 print(frame.head())
 
-#commit changes to assignment3 database
+#commit changes to cleaning database
 db_connect.commit()
 
 #close the database connection before terminating
