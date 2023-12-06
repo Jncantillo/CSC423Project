@@ -46,8 +46,8 @@ cursor.execute(query)
 query = """
     CREATE TABLE Equipment(
         equipmentId INT,
-        description VARCHAR(1000),
-        usage REAL,
+        description VARCHAR(100),
+        usage VARCHAR(250),
         cost REAL,
         PRIMARY KEY(equipmentId)
         CONSTRAINT equipmentId_uniqueness UNIQUE(equipmentId)
