@@ -30,7 +30,7 @@ query = """
         requirementId INT,
         clientNo INT,
         startDate DATE,
-        StartTime TIME,
+        startTime TIME,
         duration TIME
         CHECK(duration > '00:00:00'),
         comments VARCHAR(1000),
