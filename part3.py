@@ -32,7 +32,7 @@ query = """
         startDate DATE,
         startTime TIME,
         duration TIME
-        CHECK(duration > '00:00:00'),
+        CHECK(duration >= '00:00:00'),
         comments VARCHAR(1000),
         FOREIGN KEY (clientNo) REFERENCES Client(clientNo)
         PRIMARY KEY(requirementId)
