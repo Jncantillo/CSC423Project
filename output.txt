@@ -1,0 +1,80 @@
+
+Parts A and B:
+
+Client Table:
+   clientNo firstName    lastName                address  phoneNumber
+0      5849       tim       apple  7471 Glenridge Street   5849573846
+1      2956      jeff       bezos    9602 Windfall Court   2859305860
+2      2947      alan      turing      9856 Beach Street   2053659385
+3      1047     steve        jobs    397 Fairfield Drive   5864937584
+4      5837    george  washington       454 George Drive   2054869483
+
+ Requirement Table:
+   requirementId  clientNo   startDate startTime  duration                                           comments
+0          68463      5849  2023-12-15  08:00:00  08:00:00  Client requested fresh fruit placed on kitchen...
+1          23647      2956  2023-12-17  09:00:00  06:00:00             Client's boathouse also needs cleaning
+2          56783      2947  2023-12-19  09:30:00  04:00:00  Client requested that the roped-off machines m...
+3          68464      1047  2023-12-16  08:45:00  10:00:00  Client requested that no animal products be us...
+4          56834      5837  2023-12-20  12:30:00  05:00:00  Client specifically mentioned that there must ...
+
+ Equipment Table:
+   equipmentId   description                     usage   cost
+0          123           Mop               Mops floors   15.0
+1          456       Vaccuum          Cleans up debris   75.0
+2          789        Duster              Removes dust    1.0
+3          234        Ladder  Helps get to high places   25.0
+4          678  floor buffer             Shines floors  200.0
+
+Employee Table:
+   staffNo       firstName lastName              address    salary  phoneNumber
+0     1234            john     deer    123 Sesame Street   50000.0   1234567890
+1     5678            jane      doe      365 Ocean Drive   55000.0   3056748395
+2     9012             bob    smith      583 Apollo Lane   75000.0   7707483745
+3     3456            real   person  5643 S Miami Avenue   80000.0   6709483756
+4     6789  definitely_not    a_cat     1600 Penn Avenue  250000.0   5866844758
+
+ EquipmentRequirement Table:
+   equipmentId  requirementId  quantity
+0          123          68463        15
+1          456          23647         4
+2          789          56783        20
+3          234          68464         3
+4          678          56834         2
+
+ EmployeeRequirement Table:
+   staffNo  requirementId
+0     1234          68463
+1     5678          23647
+2     9012          56783
+3     3456          68464
+4     6789          56834
+
+Part C:
+
+Query 1: Retrieve specific client data (clientNo = 2956)
+ Client Data: (2956, 'jeff', 'bezos', '9602 Windfall Court', 2859305860)
+
+Query 2: Retrieve all clients with a specific last name
+(5849, 'tim', 'apple', '7471 Glenridge Street', 5849573846)
+
+Query 3: Adding an email column to Client
+ Updated Client Table:
+   clientNo firstName    lastName                address  phoneNumber email
+0      5849       tim       apple  7471 Glenridge Street   5849573846  None
+1      2956      jeff       bezos    9602 Windfall Court   2859305860  None
+2      2947      alan      turing      9856 Beach Street   2053659385  None
+3      1047     steve        jobs    397 Fairfield Drive   5864937584  None
+4      5837    george  washington       454 George Drive   2054869483  None
+
+Query 4: Delete employee with staffNo 1234
+ Updated Employee Table:
+   staffNo       firstName lastName              address    salary  phoneNumber
+0     5678            jane      doe      365 Ocean Drive   55000.0   3056748395
+1     9012             bob    smith      583 Apollo Lane   75000.0   7707483745
+2     3456            real   person  5643 S Miami Avenue   80000.0   6709483756
+3     6789  definitely_not    a_cat     1600 Penn Avenue  250000.0   5866844758
+
+Query 5: Calculate the average salary of employees
+ Average Salary of Employees: 115000.0
+
+ End of program
