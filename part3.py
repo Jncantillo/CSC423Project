@@ -9,6 +9,7 @@ db_connect = sqlite3.connect('cleaning.db')
 cursor = db_connect.cursor()
 
 # ---------PART A---------
+print("\nParts A and B:")
 # Query to create Client table
 query = """
     CREATE TABLE Client(
@@ -230,37 +231,62 @@ frame = pd.read_sql_query(query, db_connect)
 print("\n EmployeeRequirement Table:")
 print(frame.head())
 
+# --------PART C--------
+print("\nPart C:")
 # Query to retrieve specific client data
+print("\nQuery 1: Retrieve specific client data (clientNo = 2956)")
 client_no = 2956
 cursor.execute("SELECT * FROM Client WHERE clientNo = ?", (client_no,))
 client_data = cursor.fetchone()
-print("\n Client Data:", client_data)
+print(" Client Data:", client_data)
 
 # Query to retrieve all clients with a specific last name
+print("\nQuery 2: Retrieve all clients with a specific last name (apple)")
 last_name_to_search = 'apple'
 query = "SELECT * FROM Client WHERE lastName = ?"
 cursor.execute(query, (last_name_to_search,))
 results = cursor.fetchall()
 for row in results:
-    print(f"\n {row}")
+    print(f"{row}")
 
-# Insert a new client
-new_client = (5860, 'Dad', 'Mohawk', '6000 San Amaro Blvd', 1234567890)
-cursor.execute("INSERT INTO Client (clientNo, firstName, lastName, address, phoneNumber) VALUES (?,?,?,?,?)",
-               new_client)
+# Add an email column to the Client table
+print("\nQuery 3: Adding an email column to Client")
+query = """
+    ALTER TABLE Client
+        ADD email VARCHAR(100)
+"""
+cursor.execute(query)
+query = """
+    SELECT *
+    FROM Client;
+"""
+frame = pd.read_sql_query(query, db_connect)
+print(" Updated Client Table:")
+print(frame.head())
 
-# Query to retrieve all clients with a specific last name
+# Query to delete an employee
+print("\nQuery 4: Delete employee with staffNo 1234 ")
 staff_no_to_delete = 1234
 query = "DELETE FROM Employee WHERE staffNo = ?"
 cursor.execute(query, (staff_no_to_delete,))
+query = """
+    SELECT *
+    FROM Employee;
+"""
+frame = pd.read_sql_query(query, db_connect)
+print(" Updated Employee Table:")
+print(frame.head())
 
 # Calculate the average salary of employees
+print("\nQuery 5: Calculate the average salary of employees")
 cursor.execute("SELECT AVG(salary) FROM Employee")
 avg_salary = cursor.fetchone()[0]
-print("\n Average Salary of Employees:", avg_salary)
+print(" Average Salary of Employees:", avg_salary)
 
 # commit changes to cleaning database
 db_connect.commit()
 
 # close the database connection before terminating
 db_connect.close()
+
+print("\n End of program")
